@@ -30,6 +30,10 @@ class ShaderProgram {
   unifViewProj: WebGLUniformLocation;
   unifColor: WebGLUniformLocation;
   unifPlanePos: WebGLUniformLocation;
+  unifTime: WebGLUniformLocation;
+  unifDay: WebGLUniformLocation;
+  unifMagic: WebGLUniformLocation;
+  unifPalette: WebGLUniformLocation;
 
   constructor(shaders: Array<Shader>) {
     this.prog = gl.createProgram();
@@ -49,6 +53,10 @@ class ShaderProgram {
     this.unifModelInvTr = gl.getUniformLocation(this.prog, "u_ModelInvTr");
     this.unifViewProj   = gl.getUniformLocation(this.prog, "u_ViewProj");
     this.unifPlanePos   = gl.getUniformLocation(this.prog, "u_PlanePos");
+    this.unifTime       = gl.getUniformLocation(this.prog, "u_Time");
+    this.unifDay        = gl.getUniformLocation(this.prog, "u_Day");
+    this.unifMagic      = gl.getUniformLocation(this.prog, "u_Magic");
+    this.unifPalette    = gl.getUniformLocation(this.prog, "u_Palette");
   }
 
   use() {
@@ -83,6 +91,34 @@ class ShaderProgram {
     this.use();
     if (this.unifPlanePos !== -1) {
       gl.uniform2fv(this.unifPlanePos, pos);
+    }
+  }
+
+  setTime(t: number) {
+    this.use();
+    if (this.unifTime !== -1) {
+      gl.uniform1f(this.unifTime, t);
+    }
+  }
+
+  setDay(d: number) {
+    this.use();
+    if (this.unifDay !== -1) {
+      gl.uniform1f(this.unifDay, d);
+    }
+  }
+
+  setMagic(m: number) {
+    this.use();
+    if (this.unifMagic !== -1) {
+      gl.uniform1f(this.unifMagic, m);
+    }
+  }
+
+  setPalette(p: number) {
+    this.use();
+    if (this.unifPalette !== -1) {
+      gl.uniform1f(this.unifPalette, p);
     }
   }
 

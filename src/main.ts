@@ -13,10 +13,14 @@ import ShaderProgram, {Shader} from './rendering/gl/ShaderProgram';
 const controls = {
   tesselations: 5,
   'Load Scene': loadScene, // A function pointer, essentially
+  timeOfDay: 1,
+  magicness: 2,
+  palette: 1
 };
 
 let square: Square;
 let plane : Plane;
+let time: number = 0;
 let wPressed: boolean;
 let aPressed: boolean;
 let sPressed: boolean;
@@ -82,6 +86,9 @@ function main() {
 
   // Add controls to the gui
   const gui = new DAT.GUI();
+  gui.add(controls, 'timeOfDay', { Day: 1, Night: 2 });
+  gui.add(controls, 'magicness', 0, 10);
+  gui.add(controls, 'palette', { Rainbow: 1, PurpleGreen: 2, BlueOrange: 3})
 
   // get canvas and webgl context
   const canvas = <HTMLCanvasElement> document.getElementById('canvas');
@@ -141,10 +148,11 @@ function main() {
     processKeyPresses();
     renderer.render(camera, lambert, [
       plane,
-    ]);
+    ], time, controls.timeOfDay, controls.magicness, controls.palette);
     renderer.render(camera, flat, [
       square,
-    ]);
+    ], time, controls.timeOfDay, controls.magicness, controls.palette);
+    time++;
     stats.end();
 
     // Tell the browser to call `tick` again whenever it renders a new frame
