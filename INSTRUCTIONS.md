@@ -7,7 +7,7 @@ Clemen Deng (PennKey: clemen)
 This project is created using procedural noise functions. Viewing this project
 requires a WebGL capable browser.
 
-[WebGL link]()
+[WebGL link](https://clemendeng.github.io/hw01-noisy-terrainn/)
 
 ## Resources
 Inigo Quilez's info on [palettes](https://iquilezles.org/www/articles/palettes/palettes.htm)
